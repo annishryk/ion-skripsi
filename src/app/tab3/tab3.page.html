@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> History </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="recentactivity">
+    <h4>Recent Activity</h4>
+  </div>
+  <div *ngFor="let i of data">
+    <ion-item (click)="setOpen(true, i[2])">
+      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        <div class="atas">
+          <h5>You</h5>
+          <p><b>{{ i[2] }}</b></p>
+        </div>
+
+        <p><b> {{ i[1] }}</b></p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Detail History</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false, null)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="detail">
+        <ion-card>
+          <ion-label>Dentry</ion-label>
+          <p>{{modalData.dentry}}</p>
+        </ion-card>
+        <ion-card>
+          <ion-label>Year Academic</ion-label>
+          <p>{{modalData.thn_akademik}}</p>
+        </ion-card>
+        <div class="img">
+          <img
+            src="https://gebyar-it.xyz/latihan/LoginSession/assets/{{modalData.photo}}"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <ion-card>
+          <ion-label>Guidance Code</ion-label>
+          <p>{{modalData.kd_bimbingan}}</p>
+        </ion-card>
+        <ion-card>
+          <ion-label>Description</ion-label>
+          <p>{{modalData.keterangan}}</p>
+        </ion-card>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
